@@ -1,8 +1,8 @@
 class Player
-  attr_accessor :hand
+  attr_reader :hand
 
-  def initialize
-    @hand = []
+  def initialize(hand)
+    @hand = hand
   end
 
   def show_cards

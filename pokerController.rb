@@ -7,27 +7,27 @@ class PokerController
   MAX_PLAYERS = 6
 
   def initialize(num_players)
-    @num_players = num_players
-    unless allowed_players?
+    unless allowed_players?(num_players)
       puts "Allowed players: #{MIN_PLAYERS} to #{MAX_PLAYERS}"
       return
     end
-    @players = []
-    deal_cards
+    @num_players = num_players
+    @deck = Deck.new
+    @players = (1..@num_players).each_with_object([]) do |_, array|
+      array << Player.new(@deck.pull_poker_deck)
+    end
+  end
+
+  def new_game
+    obj = PokerHands.new
+    @players.each do |player|
+      obj.get_poker_hand(player.hand)
+    end
   end
 
   private
 
-  def allowed_players?
-    @num_players >= MIN_PLAYERS && @num_players <= MAX_PLAYERS
-  end
-
-  def deal_cards
-    deck = Deck.new
-    @num_players.times do
-      player = Player.new
-      player.hand = deck.pull_poker_deck
-      @players << player
-    end
+  def allowed_players?(num_players)
+    num_players >= MIN_PLAYERS && num_players <= MAX_PLAYERS
   end
 end

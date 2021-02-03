@@ -1,10 +1,10 @@
 class PokerGame
   require_relative 'pokerController.rb'
 
-  def play(num_players)
-    PokerController.new(num_players)
+  def self.play(num_players)
+    poker_controller = PokerController.new(num_players)
+    poker_controller.new_game
   end
 end
 
-poker_game = PokerGame.new
-poker_game.play(3)
+PokerGame.play(3)

@@ -1,16 +1,13 @@
 class PokerController
   require_relative 'deck.rb'
   require_relative 'player.rb'
-  require_relative 'pokerHands.rb'
 
   MIN_PLAYERS = 2
   MAX_PLAYERS = 6
 
   def initialize(num_players)
-    unless allowed_players?(num_players)
-      puts "Allowed players: #{MIN_PLAYERS} to #{MAX_PLAYERS}"
-      return
-    end
+    raise "Allowed: #{MIN_PLAYERS} to #{MAX_PLAYERS}" unless allowed_players?(num_players)
+
     @num_players = num_players
     @deck = Deck.new
     @players = (1..@num_players).each_with_object([]) do |_, array|
@@ -19,9 +16,8 @@ class PokerController
   end
 
   def new_game
-    obj = PokerHands.new
     @players.each do |player|
-      obj.get_poker_hand(player.hand)
+      player.poker_hand
     end
   end
 

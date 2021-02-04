@@ -14,6 +14,7 @@ class PokerHands
     high_card?
   ].freeze
   ROYAL_FLUSH = %w[10 J Q K A].freeze
+  VALUES = {A:1, J:11, Q:12, K:13}
 
   def get_poker_hand(hand)
     @hand = hand
@@ -54,8 +55,12 @@ class PokerHands
     @hand.each_cons(2).all? { |a, b| a.suit == b.suit }
   end
 
-  def straight? # it still doesn't work
-    false
+  def straight?
+    values = []
+    @hand.each_with_index do |card, i|
+      values[i] = VALUES.has_key?(card.rank.to_sym) ? VALUES[card.rank.to_sym] : card.rank.to_i
+    end
+    values.sort.each_cons(2).all? { |a, b| a + 1 == b }
   end
 
   def three_of_a_kind?

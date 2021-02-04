@@ -14,6 +14,6 @@ class Player
   end
 
   def poker_hand
-    @poker_hands.get_poker_hand(@hand)
+    @poker_hands.type(@hand)
   end
 end

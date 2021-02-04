@@ -16,7 +16,7 @@ class PokerHands
   ROYAL_FLUSH = %w[10 J Q K A].freeze
   VALUES = {A:1, J:11, Q:12, K:13}
 
-  def get_poker_hand(hand)
+  def type(hand)
     @hand = hand
     POKER_HANDS.each do |ph|
       return ph if send(ph)

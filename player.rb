@@ -1,15 +1,20 @@
 class Player
   require_relative 'pokerHands.rb'
-  attr_reader :hand
+  attr_accessor :score
+  attr_reader :hand, :id
+  @@id = 1
 
   def initialize(hand)
+    @id = @@id
+    @@id += 1
     @hand = hand
     @poker_hands = PokerHands.new
   end
 
   def show_cards
+    puts "====================== JUGADOR: #{id} ====================== "
     (0..4).each do |i|
-      p "#{hand[i].rank} #{hand[i].suit}"
+      puts "#{hand[i].rank} #{hand[i].suit}"
     end
   end
 

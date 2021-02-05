@@ -1,6 +1,4 @@
 class PokerHands
-  attr_accessor :score
-
   POKER_HANDS = %w[
     royal_flush?
     straight_flush?

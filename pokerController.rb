@@ -1,6 +1,7 @@
 class PokerController
   require_relative 'deck.rb'
   require_relative 'player.rb'
+  require_relative 'score.rb'
 
   MIN_PLAYERS = 2
   MAX_PLAYERS = 6
@@ -17,13 +18,22 @@ class PokerController
 
   def new_game
     @players.each do |player|
-      player.poker_hand
+      player.show_cards
+      type = player.poker_hand[0...-1]
+      puts "POKER HAND = #{type}"
+      player.score = Score.final_score(type, player.hand)
     end
+    who_won
   end
 
   private
 
   def allowed_players?(num_players)
     num_players >= MIN_PLAYERS && num_players <= MAX_PLAYERS
+  end
+
+  def who_won
+    id = @players.max_by { |player| player.score }.id
+    puts "=============================== PLAYER #{id} WON ==============================="
   end
 end

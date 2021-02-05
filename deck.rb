@@ -1,6 +1,7 @@
-class Deck
-  require_relative 'card.rb'
+require_relative 'card.rb'
 
+class Deck
+  attr_accessor :cards
   SUITS = %w[Clubs Diamonds Hearts Spades].freeze
   RANKS = %w[A 2 3 4 5 6 7 8 9 10 J Q K].freeze
 
@@ -12,10 +13,7 @@ class Deck
 
   def pull_poker_deck
     hand = []
-    5.times do
-      hand << @cards.first
-      @cards.delete_at(0)
-    end
+    5.times { hand << @cards.pop }
     hand
   end
 

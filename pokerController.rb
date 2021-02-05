@@ -7,7 +7,7 @@ class PokerController
   MAX_PLAYERS = 6
 
   def initialize(num_players)
-    raise "Allowed: #{MIN_PLAYERS} to #{MAX_PLAYERS}" unless allowed_players?(num_players)
+    raise "Players allowed: 2 to 6" unless allowed_players?(num_players)
 
     @num_players = num_players
     @deck = Deck.new

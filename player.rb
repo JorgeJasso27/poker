@@ -13,9 +13,7 @@ class Player
 
   def show_cards
     puts "====================== JUGADOR: #{id} ====================== "
-    (0..4).each do |i|
-      puts "#{hand[i].rank} #{hand[i].suit}"
-    end
+    hand.each { |h| puts "#{h.rank} #{h.suit}" }
   end
 
   def poker_hand
